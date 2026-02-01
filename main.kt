@@ -1,51 +1,42 @@
-package com.example.mycalculator
-
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.yourpackage.databinding.ActivityMainBinding // Replace with your actual package name
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        // Initialize Views
-        val num1 = findViewById<EditText>(R.id.num1)
-        val num2 = findViewById<EditText>(R.id.num2)
-        val resultText = findViewById<TextView>(R.id.resultText)
         
-        val btnAdd = findViewById<Button>(R.id.btnAdd)
-        val btnSub = findViewById<Button>(R.id.btnSub)
-        val btnMul = findViewById<Button>(R.id.btnMul)
-        val btnDiv = findViewById<Button>(R.id.btnDiv)
+        // Setup View Binding
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        // Click Listener Function
-        fun calculate(operation: (Double, Double) -> Double) {
-            val n1 = num1.text.toString().toDoubleOrNull()
-            val n2 = num2.text.toString().toDoubleOrNull()
+        // Set up click listeners for all buttons
+        binding.btnAdd.setOnClickListener { calculate("+") }
+        binding.btnSub.setOnClickListener { calculate("-") }
+        binding.btnMul.setOnClickListener { calculate("*") }
+        binding.btnDiv.setOnClickListener { calculate("/") }
+    }
 
-            if (n1 != null && n2 != null) {
-                val result = operation(n1, n2)
-                resultText.text = "Result: $result"
-            } else {
-                Toast.makeText(this, "Please enter valid numbers", Toast.LENGTH_SHORT).show()
-            }
+    private fun calculate(operation: String) {
+        val n1 = binding.num1.text.toString().toDoubleOrNull()
+        val n2 = binding.num2.text.toString().toDoubleOrNull()
+
+        if (n1 == null || n2 == null) {
+            binding.txtResult.text = "Please enter numbers"
+            return
         }
 
-        // Set Click Listeners
-        btnAdd.setOnClickListener { calculate { a, b -> a + b } }
-        btnSub.setOnClickListener { calculate { a, b -> a - b } }
-        btnMul.setOnClickListener { calculate { a, b -> a * b } }
-        btnDiv.setOnClickListener {
-            if (num2.text.toString() == "0") {
-                Toast.makeText(this, "Cannot divide by zero", Toast.LENGTH_SHORT).show()
-            } else {
-                calculate { a, b -> a / b }
-            }
+        val result = when (operation) {
+            "+" -> n1 + n2
+            "-" -> n1 - n2
+            "*" -> n1 * n2
+            "/" -> if (n2 != 0.0) n1 / n2 else "Error (Div by 0)"
+            else -> 0.0
         }
+
+        binding.txtResult.text = "Result: $result"
     }
 }
