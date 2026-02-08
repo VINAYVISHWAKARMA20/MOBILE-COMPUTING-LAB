@@ -14,7 +14,7 @@ exp-4 : Develop an application that uses GUI components.
 
 exp-5:Write an application that draws basic graphical primitives on the screen. (done using python)
 
-exp-6:Develop an application that makes use of database.
+exp-6:Develop an application that makes use of database. (use your own json file )
 
 exp-7:Develop a native application that uses GPS location information.
 
