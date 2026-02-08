@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "785570251901",
+    "project_id": "mobile-computing-exp-6",
+    "storage_bucket": "mobile-computing-exp-6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785570251901:android:991847d0dfc9fa3d679d14",
+        "android_client_info": {
+          "package_name": "com.example.mobilecom"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpqYeNb_ccOD65jo2RtfNv9BN2lEb7izg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
